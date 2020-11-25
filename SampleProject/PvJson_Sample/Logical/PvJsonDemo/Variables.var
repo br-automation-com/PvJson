@@ -1,0 +1,4 @@
+VAR
+	JsonSerializer_0 : JsonSerializer;
+	JsonParser_0 : JsonParser;
+END_VAR

@@ -1,0 +1,3 @@
+VAR
+	DemoVar : DemoStruct_type;
+END_VAR
