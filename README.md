@@ -30,3 +30,8 @@ Depending on the library version chosen, they can have different limitations reg
 ***(1)*** Enumerations can only be treated as numbers, these must be considered when modifying an enumeration type to delete or incorporate new elements that might affect the associated number the rest of the members have.
 
 ***(2)*** Multidimensional variables are not supported. E.g. MyArray[0..5,0..10] 
+
+# Revisions
+
+- Rev01: First release
+- Rev02: Fixed [issue #1](https://github.com/br-automation-com/PvJson/issues/1)

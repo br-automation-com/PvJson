@@ -1,3 +1,4 @@
 VAR
 	DemoVar : DemoStruct_type;
+	UnicodeMessage : ARRAY[0..80] OF UINT;
 END_VAR
