@@ -21,7 +21,7 @@ The rules to follow to select the proper library version are:
 - When using AR >= 4.4, version **4.73** should be used together with compiler version GCC 6.3.0 							***(1)***
 - When using AR >= 4.33 and AR < 4.4, version **4.34** should be used together with compiler version GCC 4.1.2   ***(1)***
 - When using AR >= 4.25 and AR < 4.33, version **4.26** should be used together with compiler version GCC 4.1.2 ***(1)***
-- When using AR < 4.25, version **3.10** should be used together with compiler version GCC 4.1.2                            ***(1)(2)***
+- When using AR < 4.25, version **3.10** should be used together with compiler version GCC 4.1.2                            ***(1)(2)(3)***
 
 # Limitations
 
@@ -31,7 +31,4 @@ Depending on the library version chosen, they can have different limitations reg
 
 ***(2)*** Multidimensional variables are not supported. E.g. MyArray[0..5,0..10] 
 
-# Revisions
-
-- Rev01: First release
-- Rev02: Fixed [issue #1](https://github.com/br-automation-com/PvJson/issues/1)
+***(3)*** Arrays with negative indexes are not working correctly. E.g. MyArray[-5 .. 5] (https://github.com/br-automation-com/PvJson/issues/2)
