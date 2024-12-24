@@ -17,11 +17,11 @@ PvJson is a library composed by two Function Blocks:
 PvJson has been compiled using several AR versions. These AR versions have been chosen with the target of covering most of the use cases, if your particular case is not covered, please open an issue in the repository.
 
 The rules to follow to select the proper library version are:
-
-- When using AR >= 4.4, version **4.73** should be used together with compiler version GCC 6.3.0 							***(1)***
-- When using AR >= 4.33 and AR < 4.4, version **4.34** should be used together with compiler version GCC 4.1.2   ***(1)***
-- When using AR >= 4.25 and AR < 4.33, version **4.26** should be used together with compiler version GCC 4.1.2 ***(1)***
-- When using AR < 4.25, version **3.10** should be used together with compiler version GCC 4.1.2                            ***(1)(2)(3)***
+- When using AR >= 6.0 version **6.0.xxx** should be used.
+- When using AR >= 4.4 and AR <= 4.93 , version **4.73** should be used together with compiler version GCC 6.3.0 							***(1)(4)***
+- When using AR >= 4.33 and AR < 4.4, version **4.34** should be used together with compiler version GCC 4.1.2   ***(1)(4)***
+- When using AR >= 4.25 and AR < 4.33, version **4.26** should be used together with compiler version GCC 4.1.2 ***(1)(4)***
+- When using AR < 4.25, version **3.10** should be used together with compiler version GCC 4.1.2                            ***(1)(2)(3)(4)***
 
 # Limitations
 
@@ -32,3 +32,5 @@ Depending on the library version chosen, they can have different limitations reg
 ***(2)*** Multidimensional variables are not supported. E.g. MyArray[0..5,0..10] 
 
 ***(3)*** Arrays with negative indexes are not working correctly. E.g. MyArray[-5 .. 5] (https://github.com/br-automation-com/PvJson/issues/2)
+
+***(4)*** AR version supported up to rev06
