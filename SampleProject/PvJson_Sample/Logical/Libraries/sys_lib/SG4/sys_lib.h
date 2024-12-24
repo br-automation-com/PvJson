@@ -15,63 +15,17 @@ extern "C"
 #define _BUR_PUBLIC
 #endif
 
-#define     TMP_MODE    0x8000          /* temporary suspend/resume for */
-                                        /* PLC and user task */
-
 /* Error codes of the BURTRAP/SYS_LIB services */
-
-#define ERR_BUR_WRROW           2061    /* illegal row */
-#define ERR_BUR_WRCOL           2062    /* illegal column */
-#define ERR_BUR_WR_CHAR         2063    /* invalid ASCII character */
-#define ERR_BUR_NORTC           2073    /* RTC not existing or uninitialized */
-
 #define ERR_BUR_MO_NOTFOUND     3019    /* module not found */
-#define ERR_BUR_NOMEM           3030    /* out of memory */
-#define ERR_BUR_MEMVWBUSY       3035    /* memory management busy */
-#define ERR_BUR_ILLPTR          3104    /* illegal data pointer in MEM_free */
-
-#define ERR_BUR_PSOS_BASE       3300    /* base number of pSOS errors */
-
-#define ERR_BUR_ILLTKNR         3300    /* illegal task-class number */
-#define ERR_BUR_WROFFSET        3301    /* illegal offset */
 #define ERR_BUR_ILLSTATE        3302    /* illegal state of object */
-#define ERR_BUR_NOMSG           3303    /* no message sent/received */
-#define ERR_BUR_DUPOBJ          3305    /* object exists */
-#define ERR_BUR_TIMEOUT         3304    /* timeout error */
-#define ERR_BUR_EXISTS          3306    /* entry exists */
-#define ERR_BUR_LCOUNT          3307    /* Linkcnt <> 0 in AVT_cancel () */
-#define ERR_BUR_BURNING         3308    /* error burning module */
-#define ERR_BUR_INVALIDMBX      3309    /* invalid mailbox */
-
-#define ERR_BUR_ILLBPTR         3310    /* invalid base pointer */
-#define ERR_BUR_ILLTYP          3311    /* invalid I/O type */
-#define ERR_BUR_ILLEXT          3312    /* invalid ext. bit */
-#define ERR_BUR_ILLVER          3313    /* invalid version */
-                                        /* e.g. BURTRAP V1.10 to SPSSW V1.05 */
-#define ERR_BUR_ILLLEN          3314    /* invalid data length */
-#define ERR_BUR_MAX_LCOUNT      3315    /* AVT_attach: LCOUNT > 127 */
-#define ERR_BUR_AVT_FREE        3316    /* AVT_release:LCOUNT = 0 */
+#define ERR_BUR_ILLTYP          3311    /* SYSreset - invalid input value for mode */
 #define ERR_BUR_ILLPAR          3317    /* illegal parameter */
-#define ERR_BUR_INSTALL         3318    /* error install datamodule */
-#define ERR_BUR_WRONG_MODTYP    3319    /* wrong Moduletype */
-
-#define ERR_BUR_OBJDEL          3320    /* object already deleted */
 #define ERR_BUR_ILLOBJ          3324    /* object does not exist */
-#define ERR_BUR_ILLOBJTYP       3328    /* invalid object type */
 #define ERR_BUR_NOENTRY         3332    /* no entry */
 #define	ERR_BUR_TOOLONG_PVNAME	3333	/* too long PV name */
 #define ERR_BUR_ILLIDENT        3336    /* illegal ident */
-#define ERR_BUR_NOSMBUF         3560    /* no more semaphore buffers */
-#define ERR_BUR_NOSM            3564    /* semaphore not available */
-#define ERR_BUR_SMDEL           3568    /* semaphore deleted */
 #define ERR_BUR_NOTIME          3584    /* time not available */
-#define ERR_BUR_ILLDATE         3588    /* date : out of range */
-#define ERR_BUR_ILLTIME         3592    /* time : out of range */
-#define ERR_BUR_ILLTICKS        3596    /* ticks : out of range */
-
-#define ERR_BUR_MEM_ALLOC       3600    /* not enough continuous memory */
 #define ERR_BUR_TMP_ALLOC       3601    /* not enough continuous memory */
-#define ERR_BUR_MEM_FREE        3700    /* invalid pointer/length */
 #define ERR_BUR_TMP_FREE        3701    /* invalid pointer/length */
 
 /* State for object PLC task */
@@ -87,24 +41,6 @@ extern "C"
 #define     Z_ST_delete         0x87
 #define     Z_ST_stdebug        0x88
 #define     Z_ST_tmp_suspended  0x90
-
-/* PV data types - obsolete */
-#define     PB_DT_STRUCT        0       /* structure */
-#define     PB_DT_BOOL          1       /* boolean */
-#define     PB_DT_INT8          2       /* integer8 */
-#define     PB_DT_INT16         3       /* integer16 */
-#define     PB_DT_INT32         4       /* integer32 */
-#define     PB_DT_BYTE          5       /* unsigned integer8 */
-#define     PB_DT_WORD          6       /* unsigned integer16 */
-#define     PB_DT_LONG          7       /* unsigned integer32 */
-#define     PB_DT_FLOAT         8       /* floating point */
-#define     PB_DT_VIS           9       /* visible string */
-#define     PB_DT_OCTET         10      /* octet string */
-#define     PB_DT_DATE          11      /* date */
-#define     PB_DT_TIME          12      /* time of day */
-#define     PB_DT_DIFF          13      /* time difference */
-#define     PB_DT_BIT           14      /* bit string */
-#define     PB_DT_ARRAY         15      /* array */
 
 /* elementary data types */
 #define 	SYSLIB_IEC_TYPE_USER_DEFINED	0	/* User-defined data type */
@@ -128,10 +64,13 @@ extern "C"
 #define		SYSLIB_IEC_TYPE_DWORD			19 	/* Bit string of length 32 */
 #define		SYSLIB_IEC_TYPE_WSTRING			21	/* Variable-length double-byte character string */
 
-/* memory types */
-#define     SYS_RAM             1       /* RAM */
-#define     USER_ROM1           2       /* EPROM */
-#define     FIX_RAM             5       /* fixed RAM */
+/* shutdown / reboot types */
+#define     SYSLIB_WARMSTART			0x01	/*WARMSTART(with restart)*/
+#define     SYSLIB_COLDSTART			0x02	/*COLDSTART(with restart)*/
+#define     SYSLIB_WARMSTART_NO_REBOOT	0x11	/*WARMSTART(no restart, only shutdown)*/
+#define     SYSLIB_COLDSTART_NO_REBOOT  0x12	/*COLDSTART(no restart, only shutdown)*/
+#define     SYSLIB_DIAGNOSTICS          0x20	/*DIAGNOSTICS(with restart)*/
+#define     SYSLIB_SERVICE				0x40	/*SERVICE(with restart) */
 
 typedef struct RTCtime_typ {
             /* 1. UDINT */
@@ -147,20 +86,6 @@ typedef struct RTCtime_typ {
             UINT     millisec;   /* millisecond: 0 - 999 */
             UINT     microsec;   /* microsecond: 0 - 999 */
         } RTCtime_typ;
-
-/* structure for SYSxinfo */
-typedef struct SYSxinfo_typ {
-        char  aws_name[6];
-        char  aws_type[2];
-        UDINT cpu_info;
-        UINT  ma_globl_len;
-        UINT  md_globl_len;
-        UDINT os_len;
-        UDINT user_len;
-        UDINT tmp_len;
-        UDINT eprom_len;
-        UDINT fix_ram_len;
-        } SYSxinfo_typ;
 
 /* structure for MO_list */
 typedef struct MO_List_typ {
@@ -212,15 +137,6 @@ typedef struct MO_info
 	plcbit enable;
 } MO_info_typ;
 
-/* structure for PV_list */
-typedef struct PV_List_typ {
-        char    name[14];        /* name of the PV (ASCII) */
-        USINT   tcnr;            /* PV task class */
-        USINT   grp;             /* PV group */
-        UDINT   ident;           /* PV identifier */
-        UDINT   adress;          /* physical address of the PV */
-        } PV_List_typ;
-
 /* structue for PV_xlist */
 typedef struct PV_xList_typ {
 
@@ -230,41 +146,6 @@ typedef struct PV_xList_typ {
 		UDINT		dimension;	 /* dimension of PV			*/
 		UDINT		adress;		 /* physical address of PV	*/
 		}PV_xList_typ;
-
-/* structure for ERR_read */
-typedef struct ERR_typ {
-        UINT    err_nr;         /* error number */
-        UDINT   err_info;       /* additional information */
-        char    t_name[5];      /* name of the running task */
-        USINT   err_type;       /* error type (1=fatal, 2=warning, 3=info) */
-        UINT    err_year;       /* time of the error in RTC format */
-        USINT   err_month;
-        USINT   err_day;
-        USINT   err_reserve;
-        USINT   err_hour;
-        USINT   err_minute;
-        USINT   err_second;
-        UINT    err_millisec;
-        UINT    err_microsec;
-        } ERR_typ;
-
-/* structure for ERR_xread */
-typedef struct ERR_xtyp {
-        UINT    err_nr;         /* error number */
-        UDINT   err_info;       /* additional information */
-        char    t_name[5];      /* name of the running task */
-        USINT   err_type;       /* error type (1=Fatal, 2=Warning, 3=Info) */
-        UINT    err_year;       /* time of the error in RTC format */
-        USINT   err_month;
-        USINT   err_day;
-        USINT   err_reserve;
-        USINT   err_hour;
-        USINT   err_minute;
-        USINT   err_second;
-        UINT    err_millisec;
-        UINT    err_microsec;
-        USINT   err_string[34]; /* 32 byte string with 0 termination */
-        } ERR_xtyp;
 
 /* structure for MO_ver */
 typedef struct MoVerStruc_typ {
@@ -602,114 +483,44 @@ typedef struct Byte2Bit {
 
 /***************/
 /* Prototyping of functions and function blocks */
-_BUR_PUBLIC UINT PV_ident		(char *pv_name_p, USINT pv_tcnr, USINT pv_grpnr,
-					 UDINT *pv_ident);
-_BUR_PUBLIC UINT PV_setval		(UDINT pv_ident, UDINT value);
-_BUR_PUBLIC UINT PV_getval		(UDINT pv_ident, UDINT *value);
-_BUR_PUBLIC UINT PV_getadr		(char *pv_name_p, USINT pv_tcnr, USINT pv_grpnr,
-					 UDINT *pv_adresse);
 _BUR_PUBLIC UINT PV_xgetadr		(char *pv_name, UDINT *pv_adresse, UDINT *data_len);
-_BUR_PUBLIC UINT PV_xsetval		(UDINT pv_ident, UINT subindex, void *data_p,
-					 USINT data_len);
-_BUR_PUBLIC UINT PV_xgetval		(UDINT pv_ident, UINT subindex, void *data_p,
-					 USINT data_len);
-_BUR_PUBLIC UINT PV_info		(UDINT pv_ident, UDINT *data_type, UDINT *data_len,
-					 UINT *dimension);
-_BUR_PUBLIC UINT PV_list		(UINT prev_index, UINT *index, PV_List_typ *pvl_p);
 _BUR_PUBLIC UINT PV_xlist		(UINT prev_index, UINT *index, PV_xList_typ *pvl_p);
 _BUR_PUBLIC UINT PV_item		(char *pv_name, UINT index, char *itemname);
 _BUR_PUBLIC UINT PV_ninfo		(char *pv_name, UDINT *data_typ_p, UDINT *data_len_p,
 					 UINT *dimension_p);
 
-
-
-_BUR_PUBLIC UINT  SYS_info		(UDINT *sg_init_cnt, UDINT *sg_initdescr, UDINT *sg_tickcnt,
-					 UDINT *sg_version, UDINT *sg_ov_version);
-_BUR_PUBLIC UINT  SYSxinfo		(SYSxinfo_typ *sx_p);
 _BUR_PUBLIC UINT  SYSreset		(BOOL enable, USINT mode);
-_BUR_PUBLIC USINT SYS_battery	(void);
 
 _BUR_PUBLIC UINT MO_list		(UINT prev_index, UINT *index, MO_List_typ *mol_p);
 _BUR_PUBLIC void MO_info		(struct MO_info* pInst);
 _BUR_PUBLIC void slMoList		(slMoList_typ * pInst);
 
-_BUR_PUBLIC UINT KEY_enadis		(BOOL mode);
-_BUR_PUBLIC UINT KEY_read		(USINT keys[4]);
-
-_BUR_PUBLIC UINT FORCE_info		(USINT tcnr, BOOL *force);
-
 _BUR_PUBLIC UINT ST_ident		(char *st_name_p, USINT st_grp, UDINT *st_ident);
-_BUR_PUBLIC UINT ST_suspend		(UDINT st_ident);
-_BUR_PUBLIC UINT ST_resume		(UDINT st_ident);
 _BUR_PUBLIC UINT ST_tmp_suspend	(UDINT st_ident);
 _BUR_PUBLIC UINT ST_tmp_resume  (UDINT st_ident);
 _BUR_PUBLIC UINT ST_allsuspend	(void);
 _BUR_PUBLIC UINT ST_info		(UDINT st_ident, USINT *state, SINT *tcnr);
 _BUR_PUBLIC UINT ST_name		(UDINT st_ident, char *st_name_p, USINT *st_grp);
 
-_BUR_PUBLIC UINT UT_ident		(char *ut_name_p, USINT ut_grp, USINT ut_proc, char *ut_sps_p,UDINT *ut_ident);
-_BUR_PUBLIC UINT UT_suspend		(UDINT ut_ident);
-_BUR_PUBLIC UINT UT_resume		(UDINT ut_ident);
-_BUR_PUBLIC UINT UT_sleep		(UDINT tickcount);
-_BUR_PUBLIC UINT UT_sendmsg		(UDINT ut_ident, void *msg, UDINT msglng, UDINT flags);
-_BUR_PUBLIC UINT UT_recmsg		(UDINT *ut_ident, void **msg, UDINT *msglng, UDINT flags);
-_BUR_PUBLIC UINT UT_freemsg		(UDINT msglng, void *msg);
-_BUR_PUBLIC UINT UT_exit		(UDINT exitinfo);
-
-
-_BUR_PUBLIC UINT AVT_create		(char *name_p, USINT grupid, UDINT av_info, UDINT *av_ident);
-_BUR_PUBLIC UINT AVT_cancel		(UDINT av_ident);
-_BUR_PUBLIC UINT AVT_ident		(char *name_p, USINT grupid, UDINT *av_ident);
-_BUR_PUBLIC UINT AVT_attach		(UDINT av_ident, UDINT *av_info);
-_BUR_PUBLIC UINT AVT_release	(UDINT av_ident);
-_BUR_PUBLIC UINT AVT_info		(UDINT av_ident, USINT *av_linkcount);
-
-_BUR_PUBLIC UINT MEM_alloc		(UDINT memlng, void **memptr);
-_BUR_PUBLIC UINT MEM_free		(UDINT memlng, void *memptr);
 _BUR_PUBLIC UINT TMP_alloc		(UDINT memlng, void **memptr);
 _BUR_PUBLIC UINT TMP_free		(UDINT memlng, void *memptr);
 
 _BUR_PUBLIC UINT RTC_gettime	(RTCtime_typ *rtctime);
 _BUR_PUBLIC UINT RTC_settime	(RTCtime_typ *rtctime);
-_BUR_PUBLIC UINT SW_gettime		(RTCtime_typ *rtctime);
-_BUR_PUBLIC UINT SW_settime		(RTCtime_typ *rtctime);
 _BUR_PUBLIC UINT TIM_musec		(void);
 _BUR_PUBLIC UINT TIM_ticks		(void);
 
-_BUR_PUBLIC UINT SM_create		(char *sm_name, USINT sm_count, UDINT *sm_ident);
-_BUR_PUBLIC UINT SM_ident		(char *sm_name, UDINT *sm_ident);
-_BUR_PUBLIC UINT SM_delete		(UDINT sm_ident);
-_BUR_PUBLIC UINT SM_attach		(UDINT sm_ident, UDINT timeout, UDINT flags);
-_BUR_PUBLIC UINT SM_release		(UDINT sm_ident);
-
 _BUR_PUBLIC UINT ERR_warning	(UINT errornr, UDINT errorinfo);
 _BUR_PUBLIC UINT ERR_fatal		(UINT errornr, UDINT errorinfo);
-_BUR_PUBLIC UINT ERR_read		(UINT entry_nr, ERR_typ *err_p);
 _BUR_PUBLIC UINT ERRxwarning	(UINT errornr, UDINT errorinfo, char* errorstring);
-_BUR_PUBLIC UINT ERRxread		(UINT entry_nr, ERR_xtyp *err_p);
 _BUR_PUBLIC UINT ERRxfatal		(UINT errornr, UDINT errorinfo, char* errorstring);
 
-_BUR_PUBLIC UINT DIS_str		(UDINT row, UDINT col, char *string);
-_BUR_PUBLIC UINT DIS_chr		(UDINT row, UDINT col, char character);
-_BUR_PUBLIC UINT DIS_clr		(void);
-
-_BUR_PUBLIC UINT DA_create		(char *name_p, USINT grp, UINT spooladr, UDINT data_len,
-					 void *data_p, void **mo_data_p, UDINT *mo_ident);
-_BUR_PUBLIC UINT DA_write		(UDINT mo_ident, void *data_p,UDINT data_len,
-					 UDINT mo_data_offset);
-_BUR_PUBLIC UINT DA_read		(UDINT mo_ident, void *data_p,UDINT data_len,
-					 UDINT mo_data_offset);
-_BUR_PUBLIC UINT DA_ident		(char *name_p, USINT grp, UDINT *mo_ident);
-_BUR_PUBLIC UINT DA_delete		(UDINT mo_ident);
-_BUR_PUBLIC UINT DA_burn		(UDINT mo_ident);
-_BUR_PUBLIC UINT DA_fix			(UDINT mo_ident);
-_BUR_PUBLIC UINT DA_info		(UDINT mo_ident, void **moduldata_adr, UDINT *moduldata_lng,
-					 USINT *memorytype);
-_BUR_PUBLIC UINT DA_copy		(UDINT mo_ident, char *new_name, USINT mem_typ, UDINT *da_ident,
-					 UDINT *daten_p, UDINT *daten_len);
-_BUR_PUBLIC UINT DA_store		(UDINT mo_ident, USINT mem_typ, UDINT* daten_p, UDINT* daten_len);
-
 _BUR_PUBLIC UINT MO_ver			(STRING *pName, USINT grp, MoVerStruc_typ* pMoVerStruc);
+
+_BUR_PUBLIC unsigned long MO_versionMajor(STRING *pName);
+_BUR_PUBLIC unsigned long MO_versionMinor(STRING *pName);
+_BUR_PUBLIC unsigned long MO_versionPatch(STRING *pName);
+_BUR_PUBLIC unsigned long MO_versionBuild(STRING *pName);
 
 _BUR_PUBLIC void Bit2Byte		(Bit2Byte_typ*	Bit2Byte_ptr);
 _BUR_PUBLIC void Byte2Bit		(Byte2Bit_typ*	Byte2Bit_ptr);
@@ -718,5 +529,4 @@ _BUR_PUBLIC void Byte2Bit		(Byte2Bit_typ*	Byte2Bit_ptr);
 };
 #endif
 #endif /* _SYS_LIB_H_ */
-
      

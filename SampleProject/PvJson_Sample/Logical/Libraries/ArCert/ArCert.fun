@@ -211,33 +211,7 @@ END_FUNCTION_BLOCK
 	END_VAR
 END_FUNCTION_BLOCK
 
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK ArCertGenerate       		(*generates a self-signed certificate and a private key*)
-	VAR_INPUT
-		Execute			: BOOL; 			(*starts execution*) 			(**) (*#PAR*)
-		Name 			: STRING[255];		(*name of the certificate*) 	(**) (*#PAR*)
-		PrivateKeyName 	: STRING[255];		(*name of the private key*) 	(**) (*#PAR*)
-		KeySize 		: ArCertKeySizeEnum;(*size of key for certificate generation*) 	(**) (*#PAR*)
-		CountryCode		: STRING[9];		(*country code*)		 		(**) (*#PAR*)
-		StateProvince	: STRING[513];		(*state*) 						(**) (*#PAR*)
-		Locality		: STRING[513];		(*locality*) 					(**) (*#PAR*)
-		Organization 	: STRING[255];		(*organization*) 				(**) (*#PAR*)
-		OrganizationUnit: STRING[255];		(*organization unit*) 			(**) (*#PAR*)
-		ContactEmail 	: STRING[513];		(*contact email*)			 	(**) (*#PAR*)
-		CommonName 		: STRING[255];		(*common name*) 				(**) (*#PAR*)
-		ValidTimeSeconds : UDINT;			(*valid time in seconds*)		(**) (*#PAR*)
-	END_VAR
-	VAR_OUTPUT
-		Done			: BOOL;				(*execution done*) 				(**) (*#PAR*)
-		Busy			: BOOL;				(*execution running*) 			(**) (*#PAR*)
-		Error			: BOOL;				(*execution failed*) 			(**) (*#PAR*)
-		StatusID		: DINT;  			(*execution error: see help*) 	(**) (*#PAR*)
-	END_VAR
-	VAR
-		Internal		: ArCertAsyncInternalType;	(*internal variable*)
-	END_VAR
-END_FUNCTION_BLOCK
-
-{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK ArCertGenerateOpcUA		(*generates a self-signed certificate and a private key*)
+{REDUND_CONTEXT} {REDUND_UNREPLICABLE} FUNCTION_BLOCK ArCertGenerateX		(*generates a self-signed certificate and a private key*)
 	VAR_INPUT
 		Execute			: BOOL; 			(*starts execution*) 			(**) (*#PAR*)
 		Name 			: STRING[255];		(*name of the certificate*) 	(**) (*#PAR*)
@@ -252,7 +226,9 @@ END_FUNCTION_BLOCK
 		ContactEmail 	: STRING[513];		(*contact email*)			 	(**) (*#PAR*)
 		CommonName 		: STRING[255];		(*common name*) 				(**) (*#PAR*)
 		ValidTimeSeconds : UDINT;			(*valid time in seconds*)		(**) (*#PAR*)
-		URI				: STRING[255];		(*URI*) 						(**) (*#PAR*)
+		URI				: STRING[513];		(*URI*) 						(**) (*#PAR*)
+		DnsName			: STRING[513];		(*DNS name*)					(**) (*#PAR*)
+		IP				: STRING[513];		(*IP*) 							(**) (*#PAR*)
 	END_VAR
 	VAR_OUTPUT
 		Done			: BOOL;				(*execution done*) 				(**) (*#PAR*)

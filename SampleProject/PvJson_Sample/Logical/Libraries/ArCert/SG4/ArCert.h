@@ -16,43 +16,6 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-/* Constants */
-#ifdef _REPLACE_CONST
- #define arCERT_ERR_URI_INVALID (-1070585784)
- #define arCERT_ERR_VALID_TIME_INVALID (-1070585785)
- #define arCERT_ERR_COUNTRY_CODE_INVALID (-1070585786)
- #define arCERT_ERR_KEY_SIZE_INVALID (-1070585787)
- #define arCERT_ERR_PRIVATE_KEY_INVALID (-1070585788)
- #define arCERT_ERR_DATA_SIZE_INVALID (-1070585789)
- #define arCERT_ERR_DATA_NULL (-1070585790)
- #define arCERT_ERR_NAME_INVALID (-1070585791)
- #define arCERT_ERR_CERT_NAME_TOO_LONG (-1070585792)
- #define arCERT_ERR_CERTIFICATE_EXISTS (-1070585793)
- #define arCERT_ERR_BUFFER_SIZE (-1070585794)
- #define arCERT_ERR_INTERNAL (-1070585795)
- #define arCERT_ERR_CERTIFICATE_NOT_FOUND (-1070585796)
-#else
- #ifndef _GLOBAL_CONST
-   #define _GLOBAL_CONST _WEAK const
- #endif
- _GLOBAL_CONST signed long arCERT_ERR_URI_INVALID;
- _GLOBAL_CONST signed long arCERT_ERR_VALID_TIME_INVALID;
- _GLOBAL_CONST signed long arCERT_ERR_COUNTRY_CODE_INVALID;
- _GLOBAL_CONST signed long arCERT_ERR_KEY_SIZE_INVALID;
- _GLOBAL_CONST signed long arCERT_ERR_PRIVATE_KEY_INVALID;
- _GLOBAL_CONST signed long arCERT_ERR_DATA_SIZE_INVALID;
- _GLOBAL_CONST signed long arCERT_ERR_DATA_NULL;
- _GLOBAL_CONST signed long arCERT_ERR_NAME_INVALID;
- _GLOBAL_CONST signed long arCERT_ERR_CERT_NAME_TOO_LONG;
- _GLOBAL_CONST signed long arCERT_ERR_CERTIFICATE_EXISTS;
- _GLOBAL_CONST signed long arCERT_ERR_BUFFER_SIZE;
- _GLOBAL_CONST signed long arCERT_ERR_INTERNAL;
- _GLOBAL_CONST signed long arCERT_ERR_CERTIFICATE_NOT_FOUND;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
 typedef enum ArCertKeySizeEnum
 {	arCERT_KEY_SIZE_1024_BITS = 1,
@@ -296,33 +259,7 @@ typedef struct ArCertDeleteCRL
 	plcbit Error;
 } ArCertDeleteCRL_typ;
 
-typedef struct ArCertGenerate
-{
-	/* VAR_INPUT (analog) */
-	plcstring Name[256];
-	plcstring PrivateKeyName[256];
-	enum ArCertKeySizeEnum KeySize;
-	plcstring CountryCode[10];
-	plcstring StateProvince[514];
-	plcstring Locality[514];
-	plcstring Organization[256];
-	plcstring OrganizationUnit[256];
-	plcstring ContactEmail[514];
-	plcstring CommonName[256];
-	unsigned long ValidTimeSeconds;
-	/* VAR_OUTPUT (analog) */
-	signed long StatusID;
-	/* VAR (analog) */
-	struct ArCertAsyncInternalType Internal;
-	/* VAR_INPUT (digital) */
-	plcbit Execute;
-	/* VAR_OUTPUT (digital) */
-	plcbit Done;
-	plcbit Busy;
-	plcbit Error;
-} ArCertGenerate_typ;
-
-typedef struct ArCertGenerateOpcUA
+typedef struct ArCertGenerateX
 {
 	/* VAR_INPUT (analog) */
 	plcstring Name[256];
@@ -337,7 +274,9 @@ typedef struct ArCertGenerateOpcUA
 	plcstring ContactEmail[514];
 	plcstring CommonName[256];
 	unsigned long ValidTimeSeconds;
-	plcstring URI[256];
+	plcstring URI[514];
+	plcstring DnsName[514];
+	plcstring IP[514];
 	/* VAR_OUTPUT (analog) */
 	signed long StatusID;
 	/* VAR (analog) */
@@ -348,7 +287,7 @@ typedef struct ArCertGenerateOpcUA
 	plcbit Done;
 	plcbit Busy;
 	plcbit Error;
-} ArCertGenerateOpcUA_typ;
+} ArCertGenerateX_typ;
 
 typedef struct ArCertGetOwnDetails
 {
@@ -419,11 +358,48 @@ _BUR_PUBLIC void ArCertDeletePrivateKey(struct ArCertDeletePrivateKey* inst);
 _BUR_PUBLIC void ArCertImportCRL(struct ArCertImportCRL* inst);
 _BUR_PUBLIC void ArCertExportCRL(struct ArCertExportCRL* inst);
 _BUR_PUBLIC void ArCertDeleteCRL(struct ArCertDeleteCRL* inst);
-_BUR_PUBLIC void ArCertGenerate(struct ArCertGenerate* inst);
-_BUR_PUBLIC void ArCertGenerateOpcUA(struct ArCertGenerateOpcUA* inst);
+_BUR_PUBLIC void ArCertGenerateX(struct ArCertGenerateX* inst);
 _BUR_PUBLIC void ArCertGetOwnDetails(struct ArCertGetOwnDetails* inst);
 _BUR_PUBLIC void ArCertGetThirdPartyDetails(struct ArCertGetThirdPartyDetails* inst);
 _BUR_PUBLIC void ArCertGetCRLDetails(struct ArCertGetCRLDetails* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define arCERT_ERR_IP_INVALID (-1070585782)
+ #define arCERT_ERR_DNS_INVALID (-1070585783)
+ #define arCERT_ERR_URI_INVALID (-1070585784)
+ #define arCERT_ERR_VALID_TIME_INVALID (-1070585785)
+ #define arCERT_ERR_COUNTRY_CODE_INVALID (-1070585786)
+ #define arCERT_ERR_KEY_SIZE_INVALID (-1070585787)
+ #define arCERT_ERR_PRIVATE_KEY_INVALID (-1070585788)
+ #define arCERT_ERR_DATA_SIZE_INVALID (-1070585789)
+ #define arCERT_ERR_DATA_NULL (-1070585790)
+ #define arCERT_ERR_NAME_INVALID (-1070585791)
+ #define arCERT_ERR_CERT_NAME_TOO_LONG (-1070585792)
+ #define arCERT_ERR_CERTIFICATE_EXISTS (-1070585793)
+ #define arCERT_ERR_BUFFER_SIZE (-1070585794)
+ #define arCERT_ERR_INTERNAL (-1070585795)
+ #define arCERT_ERR_CERTIFICATE_NOT_FOUND (-1070585796)
+#else
+ _GLOBAL_CONST signed long arCERT_ERR_IP_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_DNS_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_URI_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_VALID_TIME_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_COUNTRY_CODE_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_KEY_SIZE_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_PRIVATE_KEY_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_DATA_SIZE_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_DATA_NULL;
+ _GLOBAL_CONST signed long arCERT_ERR_NAME_INVALID;
+ _GLOBAL_CONST signed long arCERT_ERR_CERT_NAME_TOO_LONG;
+ _GLOBAL_CONST signed long arCERT_ERR_CERTIFICATE_EXISTS;
+ _GLOBAL_CONST signed long arCERT_ERR_BUFFER_SIZE;
+ _GLOBAL_CONST signed long arCERT_ERR_INTERNAL;
+ _GLOBAL_CONST signed long arCERT_ERR_CERTIFICATE_NOT_FOUND;
+#endif
+
+
 
 
 #ifdef __cplusplus

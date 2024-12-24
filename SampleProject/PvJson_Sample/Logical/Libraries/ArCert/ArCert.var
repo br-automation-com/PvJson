@@ -12,4 +12,6 @@ VAR CONSTANT
 	arCERT_ERR_COUNTRY_CODE_INVALID     : DINT := -1070585786;	(*invalid data size given*)
 	arCERT_ERR_VALID_TIME_INVALID       : DINT := -1070585785;	(*invalid data size given*)
 	arCERT_ERR_URI_INVALID              : DINT := -1070585784;	(*invalid URI given*)
+	arCERT_ERR_DNS_INVALID              : DINT := -1070585783;	(*invalid DNS name given*)
+	arCERT_ERR_IP_INVALID               : DINT := -1070585782;	(*invalid IP given*)
 END_VAR

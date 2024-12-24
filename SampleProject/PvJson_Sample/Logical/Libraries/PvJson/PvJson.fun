@@ -31,6 +31,7 @@ END_FUNCTION_BLOCK
 		FileDevice : {REDUND_UNREPLICABLE} UDINT; (*Pointer to string containing the file device name where the file is. It will be ignored if the buffer input is used*)
 		FileName : {REDUND_UNREPLICABLE} UDINT; (*Pointer to string containing the file name containing the serialized PV. It will be ignored if the buffer input is used*)
 		Buffer : {REDUND_UNREPLICABLE} UDINT; (*Pointer to string containing the serialized PV*)
+		Configuration : {REDUND_UNREPLICABLE} JsonParserConfigurationType;
 	END_VAR
 	VAR_OUTPUT
 		Busy : {REDUND_UNREPLICABLE} BOOL; (* FUB is working*)
@@ -43,5 +44,7 @@ END_FUNCTION_BLOCK
 		_pvname : {REDUND_UNREPLICABLE} UDINT;
 		_execute : {REDUND_UNREPLICABLE} BOOL;
 		_hTask : {REDUND_UNREPLICABLE} UDINT;
+		_statusID : {REDUND_UNREPLICABLE} DINT;
+		_nameOfNullItem : {REDUND_UNREPLICABLE} STRING[32];
 	END_VAR
 END_FUNCTION_BLOCK

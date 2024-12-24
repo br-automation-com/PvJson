@@ -38,7 +38,7 @@ VAR CONSTANT
 	fiERR_COM_FILE_CLOSE  			: UINT := 20715;		(*error file close*)
 	fiERR_COM_FILE_READ  			: UINT := 20716;		(*error file read*)
 	fiERR_COM_FILE_WRITE  			: UINT := 20717;		(*error file write*)
-	fiERR_COM_FILE_IOCTL  			: UINT := 20718;		(*error fiel ioctl*)
+	fiERR_COM_FILE_IOCTL  			: UINT := 20718;		(*error file ioctl*)
 	fiERR_DATA  					: UINT := 20719;		(*error data*)
 	fiERR_ASYNC_MANAGER  			: UINT := 20720;		(*error asynchron manager*)
 	fiERR_FILE_NOT_OPENED  			: UINT := 20721;		(*error file not opened*)

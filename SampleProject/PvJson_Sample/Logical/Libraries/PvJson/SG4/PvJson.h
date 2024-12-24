@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* PvJson 4.73.0 */
+/* PvJson 6.0.7001 */
 
 #ifndef _PVJSON_
 #define _PVJSON_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _PvJson_VERSION
-#define _PvJson_VERSION 4.73.0
+#define _PvJson_VERSION 6.0.7001
 #endif
 
 #include <bur/plctypes.h>
@@ -34,25 +34,15 @@ extern "C"
 #endif
 
 
-/* Constants */
-#ifdef _REPLACE_CONST
- #define PARSON_ERR_EMPTY_BUFFER (-1001)
- #define PARSON_ERR_INVALID_PARAM (-1002)
- #define PARSON_ERR_EMPTY_BUFFER2 (-1003)
- #define PARSON_ERR_EMPTY_BUFFER3 (-1004)
- #define PARSON_ERR_PV_NOT_SUPPORTED (-1005)
-#else
- _GLOBAL_CONST signed long PARSON_ERR_EMPTY_BUFFER;
- _GLOBAL_CONST signed long PARSON_ERR_INVALID_PARAM;
- _GLOBAL_CONST signed long PARSON_ERR_EMPTY_BUFFER2;
- _GLOBAL_CONST signed long PARSON_ERR_EMPTY_BUFFER3;
- _GLOBAL_CONST signed long PARSON_ERR_PV_NOT_SUPPORTED;
-#endif
-
-
-
-
 /* Datatypes and datatypes of function blocks */
+typedef enum PvJsonNullHandlingOptions
+{	PVJSON_NULL_IGNORE_AND_WARN
+} PvJsonNullHandlingOptions;
+
+typedef struct JsonParserConfigurationType
+{	enum PvJsonNullHandlingOptions NullValueHandling;
+} JsonParserConfigurationType;
+
 typedef struct JsonSerializer
 {
 	/* VAR_INPUT (analog) */
@@ -85,11 +75,14 @@ typedef struct JsonParser
 	unsigned long FileDevice;
 	unsigned long FileName;
 	unsigned long Buffer;
+	struct JsonParserConfigurationType Configuration;
 	/* VAR_OUTPUT (analog) */
 	signed long StatusID;
 	/* VAR (analog) */
 	unsigned long _pvname;
 	unsigned long _hTask;
+	signed long _statusID;
+	plcstring _nameOfNullItem[33];
 	/* VAR_INPUT (digital) */
 	plcbit Enable;
 	plcbit Execute;
@@ -107,6 +100,26 @@ typedef struct JsonParser
 /* Prototyping of functions and function blocks */
 _BUR_PUBLIC void JsonSerializer(struct JsonSerializer* inst);
 _BUR_PUBLIC void JsonParser(struct JsonParser* inst);
+
+
+/* Constants */
+#ifdef _REPLACE_CONST
+ #define PARSON_ERR_EMPTY_BUFFER (-1001)
+ #define PARSON_ERR_INVALID_PARAM (-1002)
+ #define PARSON_ERR_EMPTY_BUFFER2 (-1003)
+ #define PARSON_ERR_EMPTY_BUFFER3 (-1004)
+ #define PARSON_ERR_PV_NOT_SUPPORTED (-1005)
+ #define PVJSON_WRN_JSON_VALUE_NULL (-1101)
+#else
+ _GLOBAL_CONST signed long PARSON_ERR_EMPTY_BUFFER;
+ _GLOBAL_CONST signed long PARSON_ERR_INVALID_PARAM;
+ _GLOBAL_CONST signed long PARSON_ERR_EMPTY_BUFFER2;
+ _GLOBAL_CONST signed long PARSON_ERR_EMPTY_BUFFER3;
+ _GLOBAL_CONST signed long PARSON_ERR_PV_NOT_SUPPORTED;
+ _GLOBAL_CONST signed long PVJSON_WRN_JSON_VALUE_NULL;
+#endif
+
+
 
 
 #ifdef __cplusplus

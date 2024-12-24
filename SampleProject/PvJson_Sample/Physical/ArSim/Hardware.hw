@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio Version=4.7.2.98?>
+<?AutomationStudio WorkingVersion="6.0" FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
-  <Module Name="PC" Type="PC_any" Version="1.1.0.0" OrderNumber="PC">
+  <Module Name="PC" Type="PC_any" Version="1.1.2.0" OrderNumber="PC">
     <Parameter ID="ConfigurationID" Value="PvJson_Sample_ArSim" />
     <Group ID="FileDevice1" />
     <Parameter ID="FileDeviceName1" Value="PvJson" />
-    <Parameter ID="FileDevicePath1" Value="C:\Temp\PvJson" />
+    <Parameter ID="FileDevicePath1" Value="USER_PATH" />
+    <Parameter ID="ActivateWebServer" Value="1" />
+    <Parameter ID="ActivateSdm" Value="1" />
   </Module>
 </Hardware>
